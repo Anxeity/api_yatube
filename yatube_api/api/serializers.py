@@ -1,10 +1,8 @@
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
-from rest_framework.validators import UniqueTogetherValidator
 
-import datetime as dt
 
-from posts.models import Group, Post, Comment, User
+from posts.models import Group, Post, Comment
 
 
 class GroupSerializer(serializers.ModelSerializer):
