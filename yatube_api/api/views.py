@@ -1,8 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
+from rest_framework.views import PermissionDenied
+
 from posts.models import Group, Post
 from .serializers import GroupSerializer, PostSerializer, CommentSerializer
-from rest_framework.views import PermissionDenied
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
@@ -39,7 +40,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
         post = get_object_or_404(Post, pk=post_id)
-        queryset = post.comments
+        queryset = post.comments.all()
         return queryset
 
     def perform_update(self, serializer):
